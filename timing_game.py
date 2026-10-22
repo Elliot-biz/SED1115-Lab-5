@@ -36,11 +36,15 @@ try:
         while button.value() == 0:
             pass
 
+        time.sleep_ms(50)
+
         start_time = get_time()
 
         # Wait for the button to be released
         while button.value() == 1:
             pass
+
+        time.sleep_ms(50)
 
         print("Count 15 seconds, then press the button again")
 
@@ -48,9 +52,15 @@ try:
         while button.value() == 0:
             pass
 
+        time.sleep_ms(50)
+
         end_time = get_time()
 
         elapsed = end_time - start_time
+
+        # Handle the case where the timer crosses midnight
+        if elapsed < 0:
+            elapsed += 24 * 60 * 60
 
         print("Your time was:", elapsed, "seconds")
 
@@ -61,5 +71,7 @@ try:
         # Wait for the button to be released before starting again
         while button.value() == 1:
             pass
+
+        time.sleep_ms(50)
 finally:
     log.close()
