@@ -25,31 +25,41 @@ def get_time():
 
     return hours * 3600 + minutes * 60 + seconds
 
-while True:
-    print("Press the button to start")
+# Open the log file in append mode
+log = open("log.txt", "a")
 
-    # Wait for the first button press
-    while button.value() == 0:
-        pass
+try:
+    while True:
+        print("Press the button to start")
 
-    start_time = get_time()
+        # Wait for the first button press
+        while button.value() == 0:
+            pass
 
-    # Wait for the button to be released
-    while button.value() == 1:
-        pass
+        start_time = get_time()
 
-    print("Count 15 seconds, then press the button again")
+        # Wait for the button to be released
+        while button.value() == 1:
+            pass
 
-    # Wait for the second button press
-    while button.value() == 0:
-        pass
+        print("Count 15 seconds, then press the button again")
 
-    end_time = get_time()
+        # Wait for the second button press
+        while button.value() == 0:
+            pass
 
-    elapsed = end_time - start_time
+        end_time = get_time()
 
-    print("Your time was:", elapsed, "seconds")
+        elapsed = end_time - start_time
 
-    # Wait for the button to be released before starting again
-    while button.value() == 1:
-        pass
+        print("Your time was:", elapsed, "seconds")
+
+        # Save the result to the log file
+        log.write(str(elapsed) + "\n")
+        log.flush()
+
+        # Wait for the button to be released before starting again
+        while button.value() == 1:
+            pass
+finally:
+    log.close()
