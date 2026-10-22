@@ -24,3 +24,32 @@ def get_time():
     hours = bcd_to_int(data[2] & 0x3F)
 
     return hours * 3600 + minutes * 60 + seconds
+
+while True:
+    print("Press the button to start")
+
+    # Wait for the first button press
+    while button.value() == 0:
+        pass
+
+    start_time = get_time()
+
+    # Wait for the button to be released
+    while button.value() == 1:
+        pass
+
+    print("Count 15 seconds, then press the button again")
+
+    # Wait for the second button press
+    while button.value() == 0:
+        pass
+
+    end_time = get_time()
+
+    elapsed = end_time - start_time
+
+    print("Your time was:", elapsed, "seconds")
+
+    # Wait for the button to be released before starting again
+    while button.value() == 1:
+        pass
